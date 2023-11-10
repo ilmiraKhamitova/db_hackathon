@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static itis.hackathon.team5.generator.Generator.getInt;
 import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
 public class SignalDaoImpl {
