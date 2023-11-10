@@ -6,6 +6,7 @@ import itis.hackathon.team5.dao.SensorDao;
 import itis.hackathon.team5.dao.SignalDao;
 import itis.hackathon.team5.model.Sensor;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,14 @@ import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
 @WebServlet(name = "response", urlPatterns = "/respsignals")
 public class ResponseServlet extends HttpServlet {
+    private SignalDao signalDao;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        signalDao = new SignalDao(getConnection(URL, USER, PASSWORD));
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
@@ -30,7 +39,9 @@ public class ResponseServlet extends HttpServlet {
             List<Sensor> sensors = new SensorDao(getConnection(URL, USER, PASSWORD)).getAll();
             for(Sensor s: sensors){
                 if (s.isWork()){
-                    signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), SignalDao.get(s.getId()));
+                    List<Object> list = signalDao.get(s.getId());
+//                    TODO
+                    signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), null);
                 } else {
                     signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), "Датчик выключен");
                 }

@@ -23,12 +23,12 @@ public class SignalDao {
         preparedStatement.executeUpdate();
     }
 
-    public List<Object> get(Sensor sensor) throws SQLException {
+    public List<Object> get(int sensorId) throws SQLException {
 
 //        search value id
 
         Statement statement = connection.createStatement();
-        String sql = "select * from signal where sensor_id=" + sensor.getId() + " order by id desc limit 1;";
+        String sql = "select * from signal where sensor_id=" + sensorId + " order by id desc limit 1;";
         ResultSet resultSet = statement.executeQuery(sql);
         resultSet.next();
         int valueId = resultSet.getInt("value");
@@ -37,7 +37,7 @@ public class SignalDao {
 //        search table name
 
         statement = connection.createStatement();
-        sql = "SELECT * from sensor_types WHERE id=" + sensor.getId() + ";";
+        sql = "SELECT * from sensor_types WHERE id=" + sensorId + ";";
         resultSet = statement.executeQuery(sql);
 
         String tableName = null;
