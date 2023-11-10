@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static itis.hackathon.team5.main.*;
+import static itis.hackathon.team5.Main.*;
 import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
 @WebServlet(name = "response", urlPatterns = "/respsignals")
@@ -42,10 +44,9 @@ public class ResponseServlet extends HttpServlet {
                 if (s.isWork()) {
                     List<String> list = signalDao.get(s.getId(), s.getType());
 //                    TODO
-                    String res = list.toString();
-                    signals.put(("Sensor #" + s.getId()), res.substring(1, res.length() - 1));
+                    signals.put(("Sensor #" + s.getId() + " (" + getType(s.getType()) + ")"), list.toString());
                 } else {
-                    signals.put(("Sensor #" + s.getId()), "Sensor dead");
+                    signals.put(("Sensor #" + s.getId() + " (" + s.getId() + ")"), "Sensor dead");
                 }
             }
             System.out.println(gson.toJson(signals));
@@ -53,6 +54,21 @@ public class ResponseServlet extends HttpServlet {
             resp.getWriter().write(gson.toJson(signals));
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private String getType(int sensorId) {
+        try {
+            Statement statement = getConnection(URL, USER, PASSWORD).createStatement();
+            String sql = "SELECT * from sensor_types WHERE id=" + sensorId + ";";
+            ResultSet resultSet = statement.executeQuery(sql);
+            String type = null;
+            if (resultSet.next()) {
+                type = resultSet.getString("type");
+            }
+            return type;
+        }catch (SQLException ex){
+            throw new RuntimeException(ex);
         }
     }
 }
