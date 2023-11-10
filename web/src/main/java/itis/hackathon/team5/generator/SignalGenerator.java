@@ -1,6 +1,5 @@
 package itis.hackathon.team5.generator;
 
-
 import itis.hackathon.team5.dao.SensorDao;
 import itis.hackathon.team5.dao.SensorTypeDao;
 import itis.hackathon.team5.dao.SignalDao;
@@ -19,7 +18,6 @@ public class SignalGenerator {
         sensorDao = new SensorDao(connection);
         signalDao = new SignalDao(connection);
         sensorTypeDao = new SensorTypeDao(connection);
-
     }
 
     public void run() {

@@ -16,9 +16,6 @@ import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
 @WebServlet(name="signals", urlPatterns = "/signals")
 public class SignalServlet extends HttpServlet {
-    public static final String URL = "jdbc:postgresql://localhost:5432/hackathon";
-    public static final String USER = "test";
-    public static final String PASSWORD = "qwerty12345";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect("/signal.ftl");

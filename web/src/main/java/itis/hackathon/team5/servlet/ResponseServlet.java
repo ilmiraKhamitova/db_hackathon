@@ -22,6 +22,9 @@ import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
 @WebServlet(name = "response", urlPatterns = "/respsignals")
 public class ResponseServlet extends HttpServlet {
+    public static final String URL = "jdbc:postgresql://localhost:5432/hacaton_db";
+    public static final String USER = "hacaton";
+    public static final String PASSWORD = "qwerty123";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
