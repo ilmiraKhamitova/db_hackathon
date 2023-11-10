@@ -1,13 +1,13 @@
-Команда:  
+**Команда:**    
 Гималетдинова Айсылу,  
 Гурьева Анастасия,  
 Мельникова Софья,  
 Хамитова Ильмира  
 
-Ссылка на доску с описанием brainstorm:  
+**Ссылка на доску с описанием brainstorm:**   
 https://miro.com/app/board/uXjVNRBBhzw=/?share_link_id=701009744959
 
-Модель данных:  
+**Модель данных:**  
 https://app.diagrams.net/#G1xPUWD7lVcdFsustyU4IyYTs0vye1Ggnh
 
 ![db_hackathon - public](https://github.com/ilmiraKhamitova/db_hackathon/assets/113762897/f59385b9-3771-41a1-be5c-4dc7de76b357)
@@ -22,3 +22,4 @@ https://app.diagrams.net/#G1xPUWD7lVcdFsustyU4IyYTs0vye1Ggnh
 Генерация данных реализована на java. Каждые 10 секунд для всех датчиков, которые включены, генерируется значение состояния и записывается в таблицу signal. Для генерации берется случайное значение состояния датчика из необходимой таблицы-справочника исходя из его типа. 
 Если датчик выключен - сигнал о его состоянии не посылается (на frontend это обозначено как sensor dead).
 
+![Снимок экрана 2023-11-10 185857](https://github.com/ilmiraKhamitova/db_hackathon/assets/113761919/122e975c-6d5a-4533-9365-702535a94ed8)
