@@ -1,4 +1,4 @@
-package itis.hackathon.team5.generator.model;
+package itis.hackathon.team5.model;
 
 import java.sql.Timestamp;
 
