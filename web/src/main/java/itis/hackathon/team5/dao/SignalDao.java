@@ -1,7 +1,5 @@
 package itis.hackathon.team5.dao;
 
-import itis.hackathon.team5.model.Sensor;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
