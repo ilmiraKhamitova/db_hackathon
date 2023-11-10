@@ -19,13 +19,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static itis.hackathon.team5.main.*;
 import static itis.hackathon.team5.servlet.SignalServlet.*;
 import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
 @WebServlet(name = "response", urlPatterns = "/respsignals")
 public class ResponseServlet extends HttpServlet {
     private SignalDao signalDao;
+
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -42,7 +42,7 @@ public class ResponseServlet extends HttpServlet {
             for (Sensor s : sensors) {
                 Gson gson1 = new Gson();
                 if (s.isWork()) {
-                    List<Object> list = signalDao.get(s.getId());
+                    List<Object> list = signalDao.get(s.getId(), s.getType());
                     gson1.toJson(list);
 //                    TODO
                     signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), gson1);

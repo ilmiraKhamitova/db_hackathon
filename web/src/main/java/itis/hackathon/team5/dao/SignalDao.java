@@ -21,7 +21,7 @@ public class SignalDao {
         preparedStatement.executeUpdate();
     }
 
-    public List<Object> get(int sensorId) throws SQLException {
+    public List<Object> get(int sensorId, int sensorType) throws SQLException {
 
 //        search value id
 
@@ -35,9 +35,8 @@ public class SignalDao {
 //        search table name
 
         statement = connection.createStatement();
-        sql = "SELECT * from sensor_types WHERE id=" + sensorId + ";";
+        sql = "SELECT * from sensor_types WHERE id=" + sensorType + ";";
         resultSet = statement.executeQuery(sql);
-
         String tableName = null;
         if (resultSet.next()) {
             tableName = resultSet.getString("table_name");
