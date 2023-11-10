@@ -10,7 +10,6 @@ import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 public class SignalDaoImpl {
     public void save(int sensor_id, int value){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "insert into signal (sensor_id, value) values(?,?);";
             PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, sensor_id);
