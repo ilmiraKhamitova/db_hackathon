@@ -10,10 +10,8 @@
 </head>
 <body>
 
-<div class="block">
-    <div class="sensor" id="sensor">
+<div class="block" id="block">
 
-    </div>
 </div>
 
 <script src="script/query.js"></script>

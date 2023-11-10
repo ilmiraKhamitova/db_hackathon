@@ -8,6 +8,9 @@ body {
 .block {
     margin: 100px;
     display: grid;
+    border: 1px solid #7E6BC4;
+    border-radius: 20px;
+    padding: 12px 24px;
 }
 
 .sensor {
@@ -16,11 +19,11 @@ body {
 }
 
 .title {
-    padding: 24px 36px;
+    padding: 12px;
     width: 20%;
 
 }
 
 .content {
-    padding: 24px 36px;
+    padding: 12px;
 }

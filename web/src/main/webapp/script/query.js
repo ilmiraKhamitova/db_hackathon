@@ -1,10 +1,18 @@
 function ajaxQueryFunction(){
+    const block = document.getElementById("block");
+    block.innerHTML = "";
     $.get("/respsignals", function (response) {
-        console.log("get")
         $.each(response, function(sensor, state){
-            console.log("each")
-            console.log(response)
-            $('#sensor').append(`${sensor} ${state}`);
+            if (state === "t") state = '1';
+            if (state === 'f') state = '0';
+            $('#block').append(`<div class="sensor" id="sensor">
+                                    <div class="title">
+                                        ${sensor}
+                                    </div> 
+                                    <div class="content">
+                                        ${state}
+                                    </div> 
+                                </div>`);
         })
     })
 }
@@ -12,3 +20,4 @@ function ajaxQueryFunction(){
 ajaxQueryFunction();
 
 setInterval(ajaxQueryFunction, 10_000);
+

@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static itis.hackathon.team5.main.*;
 import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
 @WebServlet(name = "response", urlPatterns = "/respsignals")
@@ -41,9 +42,10 @@ public class ResponseServlet extends HttpServlet {
                 if (s.isWork()) {
                     List<String> list = signalDao.get(s.getId(), s.getType());
 //                    TODO
-                    signals.put(("Sensor #" + s.getId() + " (" + s.getId() + ")"), list.toString());
+                    String res = list.toString();
+                    signals.put(("Sensor #" + s.getId()), res.substring(1, res.length() - 1));
                 } else {
-                    signals.put(("Sensor #" + s.getId() + " (" + s.getId() + ")"), "Sensor dead");
+                    signals.put(("Sensor #" + s.getId()), "Sensor dead");
                 }
             }
             System.out.println(gson.toJson(signals));
