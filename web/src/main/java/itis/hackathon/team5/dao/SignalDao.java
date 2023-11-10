@@ -61,7 +61,7 @@ public class SignalDao {
         resultSet = statement.executeQuery(sql);
         resultSet.next();
         List<Object> list = new ArrayList<>();
-        for (int i = 2; i <= number; i++) {
+        for (int i = 1; i < number; i++) {
             list.add(resultSet.getObject(i));
         }
 

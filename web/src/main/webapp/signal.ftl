@@ -11,12 +11,10 @@
 <body>
 
 <div class="block">
-
     <div class="sensor" id="sensor">
 
     </div>
-
 </div>
 
-<script src="script/query.js"/>
+<script src="script/query.js"></script>
 </body>
