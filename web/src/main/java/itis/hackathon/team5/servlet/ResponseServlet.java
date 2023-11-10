@@ -2,6 +2,7 @@ package itis.hackathon.team5.servlet;
 
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import itis.hackathon.team5.dao.SensorDao;
 import itis.hackathon.team5.dao.SignalDao;
 import itis.hackathon.team5.model.Sensor;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static itis.hackathon.team5.main.*;
 import static itis.hackathon.team5.servlet.SignalServlet.*;
 import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
@@ -34,16 +36,19 @@ public class ResponseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
-        Map<String, String> signals = new HashMap<>();
+        Map<String, Gson> signals = new HashMap<>();
         try {
             List<Sensor> sensors = new SensorDao(getConnection(URL, USER, PASSWORD)).getAll();
-            for(Sensor s: sensors){
-                if (s.isWork()){
+            for (Sensor s : sensors) {
+                Gson gson1 = new Gson();
+                if (s.isWork()) {
                     List<Object> list = signalDao.get(s.getId());
+                    gson1.toJson(list);
 //                    TODO
-                    signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), null);
+                    signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), gson1);
                 } else {
-                    signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), "Датчик выключен");
+                    gson1.toJson("Датчик выключен");
+                    signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), gson1);
                 }
             }
             resp.setContentType("application/json");
