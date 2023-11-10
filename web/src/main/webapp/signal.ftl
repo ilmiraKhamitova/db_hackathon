@@ -2,44 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script>
-
-    </script>
+    <link rel="stylesheet" href="style/global.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
 </head>
 <body>
-    <#if motion?has_content>
-        <#list motion as m>
-            <h4>Motion Sensor: </h4>${m}
-        </#list>
-    </#if>
 
-    <#if water?has_content>
-        <#list motion as m>
-            <h4>Water Leak Sensor: </h4>${m}
-        </#list>
-    </#if>
+<div class="block">
 
-    <#if door?has_content>
-        <#list motion as m>
-            <h4>Door Opening Sensor: </h4>${m}
-        </#list>
-    </#if>
+    <div class="sensor" id="sensor">
 
-    <#if shutter?has_content>
-        <#list motion as m>
-            <h4>Shutter Control Sensor: </h4>${m}
-        </#list>
-    </#if>
+    </div>
 
-    <#if smoke?has_content>
-        <#list motion as m>
-            <h4>Smoke Sensor: </h4>${m}
-        </#list>
-    </#if>
+</div>
 
-    <#if light?has_content>
-        <#list motion as m>
-            <h4>Light Sensor: </h4>${m}
-        </#list>
-    </#if>
+<script src="script/query.js"/>
 </body>

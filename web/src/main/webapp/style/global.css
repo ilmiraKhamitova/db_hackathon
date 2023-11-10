@@ -1,0 +1,26 @@
+body {
+    font-family: 'Questrial', sans-serif;
+    font-size: 16px;
+    background: #FEF0FF;
+    color: #7E6BC4;
+}
+
+.block {
+    margin: 100px;
+    display: grid;
+}
+
+.sensor {
+    display: flex;
+    margin-top: 20px;
+}
+
+.title {
+    padding: 24px 36px;
+    width: 20%;
+
+}
+
+.content {
+    padding: 24px 36px;
+}
