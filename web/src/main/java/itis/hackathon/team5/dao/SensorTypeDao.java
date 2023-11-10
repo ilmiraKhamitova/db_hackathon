@@ -12,8 +12,7 @@ public class SensorTypeDao {
     public SensorTypeDao(Connection connection) {
         this.connection = connection;
     }
-    public Integer getCount(int id){
-        try {
+    public Integer getCount(int id) throws SQLException {
             Statement statement = connection.createStatement();
             String sql = "SELECT * from sensor_types WHERE id=" + id + ";";
             ResultSet resultSet = statement.executeQuery(sql);
@@ -30,8 +29,5 @@ public class SensorTypeDao {
                 return resultSet.getInt(1);
             }
             return 0;
-        }catch(SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
