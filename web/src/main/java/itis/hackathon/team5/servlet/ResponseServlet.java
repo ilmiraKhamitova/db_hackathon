@@ -20,8 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import static itis.hackathon.team5.Main.*;
-import static itis.hackathon.team5.main.*;
+import static itis.hackathon.team5.Main.*;
+
 import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
 @WebServlet(name = "response", urlPatterns = "/respsignals")
@@ -35,13 +35,12 @@ public class ResponseServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Gson gson = new Gson();
         Map<String, String> signals = new HashMap<>();
         try {
             List<Sensor> sensors = new SensorDao(getConnection(URL, USER, PASSWORD)).getAll();
             for (Sensor s : sensors) {
-                Gson gson1 = new Gson();
                 if (s.isWork()) {
                     List<String> list = signalDao.get(s.getId(), s.getType());
                     String res = list.toString();
@@ -59,8 +58,7 @@ public class ResponseServlet extends HttpServlet {
     }
 
     private String getType(int sensorId) {
-        try {
-            Statement statement = getConnection(URL, USER, PASSWORD).createStatement();
+        try (Statement statement = getConnection(URL, USER, PASSWORD).createStatement()) {
             String sql = "SELECT * from sensor_types WHERE id=" + sensorId + ";";
             ResultSet resultSet = statement.executeQuery(sql);
             String type = null;
@@ -68,7 +66,7 @@ public class ResponseServlet extends HttpServlet {
                 type = resultSet.getString("type");
             }
             return type;
-        }catch (SQLException ex){
+        } catch (SQLException ex){
             throw new RuntimeException(ex);
         }
     }
