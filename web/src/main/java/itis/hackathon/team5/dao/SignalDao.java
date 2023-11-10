@@ -21,7 +21,7 @@ public class SignalDao {
         preparedStatement.executeUpdate();
     }
 
-    public List<Object> get(int sensorId, int sensorType) throws SQLException {
+    public List<String> get(int sensorId, int sensorType) throws SQLException {
 
 //        search value id
 
@@ -59,9 +59,9 @@ public class SignalDao {
         sql = "select * from " + tableName + " where id=" + valueId + ";";
         resultSet = statement.executeQuery(sql);
         resultSet.next();
-        List<Object> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (int i = 1; i < number; i++) {
-            list.add(resultSet.getObject(i));
+            list.add(resultSet.getString(i));
         }
 
         return list;

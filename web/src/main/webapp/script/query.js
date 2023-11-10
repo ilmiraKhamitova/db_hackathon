@@ -1,8 +1,9 @@
 function ajaxQueryFunction(){
     $.get("/respsignals", function (response) {
-        console.log("fetch gone")
+        console.log("get")
         $.each(response, function(sensor, state){
-            console.log("response get")
+            console.log("each")
+            console.log(response)
             $('#sensor').append(`${sensor} ${state}`);
         })
     })

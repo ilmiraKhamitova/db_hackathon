@@ -2,7 +2,6 @@ package itis.hackathon.team5.servlet;
 
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import itis.hackathon.team5.dao.SensorDao;
 import itis.hackathon.team5.dao.SignalDao;
 import itis.hackathon.team5.model.Sensor;
@@ -19,13 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static itis.hackathon.team5.servlet.SignalServlet.*;
 import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
 
 @WebServlet(name = "response", urlPatterns = "/respsignals")
 public class ResponseServlet extends HttpServlet {
     private SignalDao signalDao;
-
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -36,21 +33,20 @@ public class ResponseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Gson gson = new Gson();
-        Map<String, Gson> signals = new HashMap<>();
+        Map<String, String> signals = new HashMap<>();
         try {
             List<Sensor> sensors = new SensorDao(getConnection(URL, USER, PASSWORD)).getAll();
             for (Sensor s : sensors) {
                 Gson gson1 = new Gson();
                 if (s.isWork()) {
-                    List<Object> list = signalDao.get(s.getId(), s.getType());
-                    gson1.toJson(list);
+                    List<String> list = signalDao.get(s.getId(), s.getType());
 //                    TODO
-                    signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), gson1);
+                    signals.put(("Sensor #" + s.getId() + " (" + s.getId() + ")"), list.toString());
                 } else {
-                    gson1.toJson("Датчик выключен");
-                    signals.put(("Датчик №" + s.getId() + " (" + s.getId() + ")"), gson1);
+                    signals.put(("Sensor #" + s.getId() + " (" + s.getId() + ")"), "Sensor dead");
                 }
             }
+            System.out.println(gson.toJson(signals));
             resp.setContentType("application/json");
             resp.getWriter().write(gson.toJson(signals));
         } catch (SQLException e) {
