@@ -5,20 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnectionUtil {
-    public static final String URL = "jdbc:postgresql://localhost:5432/hackathon";
-    public static final String USER = "test";
-    public static final String PASSWORD = "qwerty12345";
     public static final String DRIVER = "org.postgresql.Driver";
     private static Connection connection;
 
-    public static Connection getConnection() {
+    public static Connection getConnection(String url, String user, String password) {
         if (connection == null) {
             try {
                 Class.forName(DRIVER);
                 connection = DriverManager.getConnection(
-                        URL,
-                        USER,
-                        PASSWORD
+                    url, user, password
                 );
             } catch (ClassNotFoundException | SQLException e) {
                 throw new RuntimeException(e);

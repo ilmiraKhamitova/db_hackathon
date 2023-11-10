@@ -1,15 +1,20 @@
 package itis.hackathon.team5.dao;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static itis.hackathon.team5.util.DatabaseConnectionUtil.getConnection;
-
 public class SensorTypeDao {
-    public static Integer getCount(int id){
+
+    private final Connection connection;
+
+    public SensorTypeDao(Connection connection) {
+        this.connection = connection;
+    }
+    public Integer getCount(int id){
         try {
-            Statement statement = getConnection().createStatement();
+            Statement statement = connection.createStatement();
             String sql = "SELECT * from sensor_types WHERE id=" + id + ";";
             ResultSet resultSet = statement.executeQuery(sql);
 
